@@ -56,7 +56,7 @@ export default function MicButton({ onMatch }: Props) {
         if (results.length > 0) {
           const matched = results[0].item;
           onMatch(matched);
-          setTimeout(() => speakWord(matched.word), 600);
+          setTimeout(() => speakWord(matched.word), 3000);
           break;
         }
       }
