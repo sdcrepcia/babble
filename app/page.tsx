@@ -10,16 +10,11 @@ export default function Home() {
   const [celebrate, setCelebrate] = useState(false);
 
   const handleMatch = (word: Word) => {
-  setMatchedWord(word);
-  setCelebrate(false);
-  setTimeout(() => setCelebrate(true), 50);
-  // Delay audio to let the mic-off system sound finish first
-  setTimeout(() => {
-    const audio = new Audio("/sounds/success.mp3");
-    audio.play().catch(() => {});
-  }, 300);
-};
-
+    setMatchedWord(word);
+    setCelebrate(false);
+    setTimeout(() => setCelebrate(true), 50);
+    // No success.mp3 — TTS handles all audio feedback
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-purple-500 to-blue-400 flex flex-col items-center justify-center gap-6 p-4">
