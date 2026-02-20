@@ -5,15 +5,34 @@ import WordCard from "../components/WordCard";
 import CelebrationOverlay from "../components/CelebrationOverlay";
 import { Word } from "../lib/words";
 
+// ✅ speakWord function — outside the component
 function speakWord(word: string) {
+  window.speechSynthesis.cancel();
+  
   const utterance = new SpeechSynthesisUtterance(word);
   utterance.lang = "en-US";
   utterance.rate = 0.8;
   utterance.pitch = 1.2;
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(utterance);
+
+  if (window.speechSynthesis.paused) {
+    window.speechSynthesis.resume();
+  }
+
+  setTimeout(() => {
+    window.speechSynthesis.speak(utterance);
+  }, 100);
 }
 
+// ✅ Keep-alive — outside the component, runs once on load
+if (typeof window !== "undefined") {
+  setInterval(() => {
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
+  }, 10000);
+}
+
+// ✅ The actual component
 export default function Home() {
   const [matchedWord, setMatchedWord] = useState<Word | null>(null);
   const [celebrate, setCelebrate] = useState(false);
