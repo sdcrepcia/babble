@@ -15,17 +15,17 @@ type Props = { word: Word | null };
 export default function WordCard({ word }: Props) {
   if (!word) return null;
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-4">
       <img
         src={word.image}
         alt={word.word}
         onClick={() => speakWord(word.word)}
-        className="w-80 h-80 object-cover rounded-3xl shadow-2xl border-4 border-white cursor-pointer active:scale-95 transition-transform"
+        className="w-56 h-56 sm:w-72 sm:h-72 object-cover rounded-3xl shadow-2xl border-4 border-white cursor-pointer active:scale-95 transition-transform"
       />
-      <p className="text-7xl font-black uppercase tracking-widest text-white drop-shadow-lg">
+      <p className="text-5xl sm:text-7xl font-black uppercase tracking-widest text-white drop-shadow-lg">
         {word.word}
       </p>
-      <p className="text-xl text-white/70 uppercase tracking-widest">
+      <p className="text-base sm:text-xl text-white/70 uppercase tracking-widest">
         {word.category}
       </p>
     </div>

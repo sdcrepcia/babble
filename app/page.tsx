@@ -18,15 +18,15 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-purple-500 to-blue-400 flex flex-col items-center justify-center gap-8 p-6">
-      <h1 className="text-5xl font-black text-white drop-shadow-lg text-center">
+    <main className="min-h-screen bg-gradient-to-b from-purple-500 to-blue-400 flex flex-col items-center justify-center gap-6 p-4">
+      <h1 className="text-3xl font-black text-white drop-shadow-lg text-center">
         🗣️ Say a Word!
       </h1>
 
       {matchedWord ? (
         <WordCard word={matchedWord} />
       ) : (
-        <p className="text-2xl text-white/80 font-bold animate-pulse">
+        <p className="text-lg text-white/80 font-bold animate-pulse text-center">
           Press the mic and say something! 🎉
         </p>
       )}
