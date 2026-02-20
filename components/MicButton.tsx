@@ -5,15 +5,6 @@ import { WORDS, Word } from "../lib/words";
 
 const fuse = new Fuse(WORDS, { keys: ["word"], threshold: 0.3 });
 
-function speakWord(word: string) {
-  const utterance = new SpeechSynthesisUtterance(word);
-  utterance.lang = "en-US";
-  utterance.rate = 0.8;
-  utterance.pitch = 1.2;
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(utterance);
-}
-
 type Props = { onMatch: (word: Word) => void };
 
 export default function MicButton({ onMatch }: Props) {
@@ -27,7 +18,6 @@ export default function MicButton({ onMatch }: Props) {
   };
 
   const startListening = () => {
-    // If stuck in listening mode, tap again to reset
     if (listening) {
       stopListening();
       return;
@@ -43,7 +33,6 @@ export default function MicButton({ onMatch }: Props) {
     recognition.continuous = false;
     recognition.maxAlternatives = 3;
 
-    // Safety timeout — force stop after 8 seconds if stuck
     const timeout = setTimeout(() => stopListening(), 8000);
 
     recognition.onresult = (event: any) => {
@@ -54,24 +43,15 @@ export default function MicButton({ onMatch }: Props) {
       for (const spoken of alternatives) {
         const results = fuse.search(spoken);
         if (results.length > 0) {
-          const matched = results[0].item;
-          onMatch(matched);
-          setTimeout(() => speakWord(matched.word), 3000);
+          onMatch(results[0].item); // just fire the match, no speakWord here
           break;
         }
       }
       stopListening();
     };
 
-    recognition.onerror = () => {
-      clearTimeout(timeout);
-      stopListening();
-    };
-
-    recognition.onend = () => {
-      clearTimeout(timeout);
-      setListening(false);
-    };
+    recognition.onerror = () => { clearTimeout(timeout); stopListening(); };
+    recognition.onend = () => { clearTimeout(timeout); setListening(false); };
 
     recognition.start();
     recognitionRef.current = recognition;

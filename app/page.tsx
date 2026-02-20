@@ -5,6 +5,15 @@ import WordCard from "../components/WordCard";
 import CelebrationOverlay from "../components/CelebrationOverlay";
 import { Word } from "../lib/words";
 
+function speakWord(word: string) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-US";
+  utterance.rate = 0.8;
+  utterance.pitch = 1.2;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance);
+}
+
 export default function Home() {
   const [matchedWord, setMatchedWord] = useState<Word | null>(null);
   const [celebrate, setCelebrate] = useState(false);
@@ -13,7 +22,7 @@ export default function Home() {
     setMatchedWord(word);
     setCelebrate(false);
     setTimeout(() => setCelebrate(true), 50);
-    // No success.mp3 — TTS handles all audio feedback
+    setTimeout(() => speakWord(word.word), 800);
   };
 
   return (
