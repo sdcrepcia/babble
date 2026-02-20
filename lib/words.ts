@@ -126,8 +126,8 @@ export const WORDS: Word[] = [
   { word: "slide", category: "toys", image: "https://images.unsplash.com/photo-1575783970733-1aaedde1db74?w=600" },
 
   // Family
-  { word: "mama", category: "family", image: "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600" },
-  { word: "dada", category: "family", image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600" },
+  { word: "mama", category: "family", image: "/images/mama.jpeg" },
+  { word: "dada", category: "family", image: "/images/dada.jpeg" },
   { word: "baby", category: "family", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600" },
   { word: "grandma", category: "family", image: "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=600" },
   { word: "grandpa", category: "family", image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=600" },
